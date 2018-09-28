@@ -4,6 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.holunda.ext.customjob.api.ExecuteJobCommand
 import io.holunda.ext.customjob.api.JobPayload
 import io.holunda.ext.customjob.api.OnJobDelete
+import io.holunda.ext.customjob.api.ScheduleJobCommand
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl.DB_SCHEMA_UPDATE_DROP_CREATE
 import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
@@ -49,21 +50,17 @@ class CustomJobHandlerTest {
 
   @Test
   fun `custom job created and executed`() {
-    camunda.processEngineConfiguration.commandExecutorTxRequired.execute {
-      it.jobManager.schedule(TimerEntity().apply {
-        jobHandlerType = DummyJobHandler.type
-        duedate = Date.from(Instant.now())
-        jobHandlerConfiguration = builder.jobHandlerConfiguration(FooPayload(name = "foo"))
-      })
-    }
+    val gateway = CamundaJobGateway(camunda.processEngineConfiguration, builder)
 
-    val job = camunda.managementService.createJobQuery().singleResult() as TimerEntity
+    val id = gateway.send(ScheduleJobCommand(jobHandlerType = DummyJobHandler.type, payload = FooPayload("foo"), dueDate = Instant.now()))
+
+    val job = camunda.managementService.createJobQuery().jobId(id).singleResult() as TimerEntity
 
     assertThat(job).isNotNull
     assertThat(job.duedate).isInSameMinuteWindowAs(Date.from(Instant.now()))
 
     camunda.managementService.executeJob(job.id)
 
-    assertThat(camunda.managementService.createJobQuery().singleResult()).isNull()
+    assertThat(camunda.managementService.createJobQuery().jobId(id).singleResult()).isNull()
   }
 }
