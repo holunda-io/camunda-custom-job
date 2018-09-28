@@ -1,1 +1,0 @@
-/Users/jangalinski/IdeaProjects/holunda/camunda-custom-job/buildSrc/build/classes/kotlin/main/Versions.class
