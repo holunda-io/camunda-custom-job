@@ -1,8 +1,5 @@
 package io.holunda.ext.customjob.api
 
-import org.camunda.bpm.engine.impl.interceptor.CommandContext
-import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity
-import org.camunda.bpm.engine.impl.persistence.entity.JobEntity
 import java.time.Instant
 
 
