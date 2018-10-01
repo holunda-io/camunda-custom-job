@@ -30,6 +30,8 @@ class CamundaJobGateway(private val configuration: ProcessEngineConfigurationImp
         MessageEntity().apply {
           jobHandlerType = cmd.jobHandlerType
           jobHandlerConfiguration = jobHandlerBuilder.jobHandlerConfiguration(cmd.payload)
+
+          it.jobManager.insertJob(this)
         }.id
       }
     }

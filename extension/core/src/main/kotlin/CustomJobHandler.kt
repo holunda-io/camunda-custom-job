@@ -1,6 +1,7 @@
 package io.holunda.ext.customjob
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.holunda.ext.customjob.api.CustomJobHandler
 import io.holunda.ext.customjob.api.ExecuteJobCommand
 import io.holunda.ext.customjob.api.JobPayload
 import io.holunda.ext.customjob.api.OnJobDelete
@@ -12,15 +13,6 @@ import org.camunda.bpm.engine.impl.persistence.entity.JobEntity
 
 interface CustomJobHandlerConfiguration<T : JobPayload> : JobHandlerConfiguration {
   val payload: T
-}
-
-interface CustomJobHandler<T : JobPayload> {
-  val type: String
-  val payloadType: Class<T>
-
-  fun execute(cmd: ExecuteJobCommand<T>)
-
-  fun onDelete(cmd: OnJobDelete<T>) = Unit
 }
 
 class CustomJobHandlerBuilder(val objectMapper: ObjectMapper) {
