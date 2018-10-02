@@ -1,6 +1,7 @@
 package io.holunda.ext.customjob.api
 
 import java.time.Instant
+import java.util.function.Supplier
 
 
 sealed class CreateJobCommand(open val jobHandlerType: String, open val payload: JobPayload)
@@ -29,3 +30,5 @@ data class InsertJobCommand (
 interface CreateJobGateway {
   fun send(cmd: CreateJobCommand) : String
 }
+
+interface Foo : Supplier<String>

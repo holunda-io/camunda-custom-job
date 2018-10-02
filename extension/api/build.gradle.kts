@@ -14,9 +14,6 @@ configure<DependencyManagementExtension> {
 }
 
 dependencies {
-  compile(kotlin("stdlib-jdk8"))
-  compile(kotlin("reflect"))
-
   compileOnly("org.camunda.bpm:camunda-engine")
 
   compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
@@ -29,13 +26,3 @@ dependencies {
 
 }
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-  jvmTarget = Versions.java
-  freeCompilerArgs = listOf("-Xjsr305=strict")
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-  jvmTarget = Versions.java
-  freeCompilerArgs = listOf("-Xjsr305=strict")
-}
