@@ -1,4 +1,4 @@
-package io.holunda.ext.customjob.api
+package io.holunda.job.api
 
 /**
  * Implement this to create a jobHandler.

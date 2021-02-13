@@ -1,8 +1,8 @@
-package io.holunda.ext.customjob.test
+package io.holunda.job.test
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.holunda.ext.customjob.CustomJobHandlerBuilder
-import io.holunda.ext.customjob.api.CustomJobHandler
+import io.holunda.job.CustomJobHandlerBuilder
+import io.holunda.job.api.CustomJobHandler
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
 import org.camunda.bpm.engine.impl.history.HistoryLevel

@@ -1,16 +1,12 @@
 package io.holunda.ext.customjob
 
-import io.holunda.ext.customjob.test.DummyJobHandler
-import io.holunda.ext.customjob.test.FooPayload
-import io.holunda.ext.customjob.api.ScheduleJobCommand
-import io.holunda.ext.customjob.test.builder
-import io.holunda.ext.customjob.test.processEngineRule
+import io.holunda.job.api.ScheduleJobCommand
+import io.holunda.job.test.DummyJobHandler
+import io.holunda.job.test.FooPayload
+import io.holunda.job.test.builder
+import io.holunda.job.test.processEngineRule
 import org.assertj.core.api.Assertions.assertThat
-import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl.DB_SCHEMA_UPDATE_DROP_CREATE
-import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
 import org.camunda.bpm.engine.impl.persistence.entity.TimerEntity
-import org.camunda.bpm.engine.test.ProcessEngineRule
-import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.junit.Rule
 import org.junit.Test
 import java.time.Instant

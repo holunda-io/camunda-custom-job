@@ -1,6 +1,7 @@
 package io.holunda.ext.customjob
 
-import io.holunda.ext.customjob.api.*
+import io.holunda.job.CustomJobHandlerBuilder
+import io.holunda.job.api.*
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.camunda.bpm.engine.impl.context.Context
 import org.camunda.bpm.engine.impl.interceptor.Command

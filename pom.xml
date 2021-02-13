@@ -50,6 +50,16 @@
   <dependencyManagement>
     <dependencies>
       <!-- PROJECT -->
+      <dependency>
+        <groupId>io.holunda.job</groupId>
+        <artifactId>camunda-custom-job-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.job</groupId>
+        <artifactId>camunda-custom-job</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
       <!-- CAMUNDA -->
       <dependency>

@@ -1,10 +1,10 @@
-package io.holunda.ext.customjob
+package io.holunda.job
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.holunda.ext.customjob.api.CustomJobHandler
-import io.holunda.ext.customjob.api.ExecuteJobCommand
-import io.holunda.ext.customjob.api.JobPayload
-import io.holunda.ext.customjob.api.OnJobDelete
+import io.holunda.job.api.CustomJobHandler
+import io.holunda.job.api.ExecuteJobCommand
+import io.holunda.job.api.JobPayload
+import io.holunda.job.api.OnJobDelete
 import org.camunda.bpm.engine.impl.interceptor.CommandContext
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandlerConfiguration
@@ -37,14 +37,17 @@ class CustomJobHandlerBuilder(val objectMapper: ObjectMapper) {
   fun <T : JobPayload> jobHandler(handler: CustomJobHandler<T>) = object : JobHandler<CustomJobHandlerConfiguration<T>> {
     override fun newConfiguration(canonicalString: String): CustomJobHandlerConfiguration<T> = jobHandlerConfiguration(canonicalString, handler.payloadType)
 
-    override fun onDelete(configuration: CustomJobHandlerConfiguration<T>, jobEntity: JobEntity) = handler.onDelete(OnJobDelete(configuration.payload, jobEntity))
+    override fun onDelete(configuration: CustomJobHandlerConfiguration<T>, jobEntity: JobEntity) =
+      handler.onDelete(OnJobDelete(configuration.payload, jobEntity))
 
     override fun getType(): String = handler.type
 
-    override fun execute(configuration: CustomJobHandlerConfiguration<T>,
-                         execution: ExecutionEntity?,
-                         commandContext: CommandContext,
-                         tenantId: String?) = handler.execute(ExecuteJobCommand(configuration.payload, execution, commandContext, tenantId))
+    override fun execute(
+      configuration: CustomJobHandlerConfiguration<T>,
+      execution: ExecutionEntity?,
+      commandContext: CommandContext,
+      tenantId: String?
+    ) = handler.execute(ExecuteJobCommand(configuration.payload, execution, commandContext, tenantId))
 
     override fun toString(): String = "${handler::class.simpleName}[type=${type}]"
   }

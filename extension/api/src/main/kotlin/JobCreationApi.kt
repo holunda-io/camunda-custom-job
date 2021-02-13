@@ -1,8 +1,7 @@
-package io.holunda.ext.customjob.api
+package io.holunda.job.api
 
 import java.time.Instant
 import java.util.function.Supplier
-
 
 sealed class CreateJobCommand(open val jobHandlerType: String, open val payload: JobPayload)
 

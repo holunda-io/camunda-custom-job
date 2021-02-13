@@ -1,9 +1,9 @@
-package io.holunda.ext.customjob.test
+package io.holunda.job.test
 
-import io.holunda.ext.customjob.api.CustomJobHandler
-import io.holunda.ext.customjob.api.ExecuteJobCommand
-import io.holunda.ext.customjob.api.JobPayload
-import io.holunda.ext.customjob.api.OnJobDelete
+import io.holunda.job.api.CustomJobHandler
+import io.holunda.job.api.ExecuteJobCommand
+import io.holunda.job.api.JobPayload
+import io.holunda.job.api.OnJobDelete
 
 
 data class FooPayload(val name: String) : JobPayload

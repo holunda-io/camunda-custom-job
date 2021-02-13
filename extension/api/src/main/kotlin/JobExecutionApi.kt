@@ -1,4 +1,4 @@
-package io.holunda.ext.customjob.api
+package io.holunda.job.api
 
 import org.camunda.bpm.engine.impl.interceptor.CommandContext
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity
@@ -18,11 +18,14 @@ data class ExecuteJobCommand<T : JobPayload>(
   override val payload: T,
   val execution: ExecutionEntity?,
   val commandContext: CommandContext,
-  val tenantId: String?) : JobHandlerCommand<T>(payload)
+  val tenantId: String?
+) : JobHandlerCommand<T>(payload)
 
 
 /**
  * Wraps all information passed to the JobHandler#onDelete method.
  */
-data class OnJobDelete<T : JobPayload>(override val payload: T, val jobEntity: JobEntity) : JobHandlerCommand<T>(payload)
-
+data class OnJobDelete<T : JobPayload>(
+  override val payload: T,
+  val jobEntity: JobEntity
+) : JobHandlerCommand<T>(payload)

@@ -1,11 +1,12 @@
-package io.holunda.ext.customjob
+package io.holunda.job
 
-import io.holunda.ext.customjob.api.CreateJobGateway
-import io.holunda.ext.customjob.api.InsertJobCommand
-import io.holunda.ext.customjob.test.DummyJobHandler
-import io.holunda.ext.customjob.test.FooPayload
-import io.holunda.ext.customjob.test.builder
-import io.holunda.ext.customjob.test.processEngineRule
+import io.holunda.ext.customjob.CamundaJobGateway
+import io.holunda.job.api.CreateJobGateway
+import io.holunda.job.api.InsertJobCommand
+import io.holunda.job.test.DummyJobHandler
+import io.holunda.job.test.FooPayload
+import io.holunda.job.test.builder
+import io.holunda.job.test.processEngineRule
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.JavaDelegate
@@ -28,10 +29,12 @@ class InsertJobFromJavaDelegate {
 
   class CreateJobDelegate(private val gateway: CreateJobGateway) : JavaDelegate {
     override fun execute(execution: DelegateExecution) {
-      gateway.send(InsertJobCommand(
+      gateway.send(
+        InsertJobCommand(
         jobHandlerType = DummyJobHandler.TYPE,
         payload = FooPayload(name = "hello")
-      ))
+      )
+      )
     }
   }
 
